@@ -1,16 +1,17 @@
-import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import App from './Components/App';
-import { ApolloProvider } from 'react-apollo';
-import client from './apollo';
-import GlobalStyle from './globalStyles';
+import React from "react";
+import ReactDOM from "react-dom";
+import { ApolloProvider } from "react-apollo";
+import App from "./Components/App";
+import client from "./apollo";
+import GlobalStyle from "./globalStyles";
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <Fragment>
-            <GlobalStyle />
-            <App />
-        </Fragment>
-    </ApolloProvider>, 
-    document.getElementById('root')
+  <ApolloProvider client={client}>
+    <>
+      <GlobalStyle />
+      <App />
+    </>
+  </ApolloProvider>,
+  // eslint-disable-next-line no-undef
+  document.getElementById("root")
 );
