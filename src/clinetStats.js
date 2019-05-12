@@ -1,5 +1,5 @@
 import { NOTE_FRAGMENT } from './fragments';
-import { GET_NOTES } from './queries';
+import { GET_NOTES, GET_NOTE } from './queries';
 
 const notes = [
     {
@@ -66,6 +66,27 @@ export const resolvers = {
                 }
             });
             return newNote;
+        },
+        editNote: (_, { id, title, content }, { cache }) => {
+            const noteId = cache.config.dataIdFromObject({
+                __typename: "Note",
+                id
+            });
+            const note = cache.readFragment({ fragment: NOTE_FRAGMENT, id: noteId });
+
+            const updatedNote = {
+                ...note,
+                title,
+                content
+            };
+
+            cache.writeFragment({
+                id: noteId,
+                fragment: NOTE_FRAGMENT,
+                data: updatedNote
+            });
+
+            return updatedNote;    
         }
     }
 };
